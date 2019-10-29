@@ -1,0 +1,8 @@
+[Unit]
+Description=Autodeploy Service
+
+[Service]
+User=ofagbuji
+WorkingDirectory=/home/ofagbuji/autodeploy
+Type=oneshot
+ExecStart=/bin/bash /home/ofagbuji/autodeploy/check-updates.sh

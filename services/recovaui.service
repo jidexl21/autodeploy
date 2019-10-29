@@ -1,0 +1,16 @@
+[Unit]
+Description=Recova user interface service
+
+[Service]
+WorkingDirectory=/home/ofagbuji/apps/recovaui
+ExecStart=/home/ofagbuji/apps/recovaui/runreact.sh
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=recovaui
+User=ofagbuji
+	
+[Install]
+WantedBy=multi-user.target
+
+

@@ -1,0 +1,18 @@
+[Unit]
+Description=Recova CBA  webapi Service
+
+[Service]
+WorkingDirectory=/home/ofagbuji/apps/recova.cba
+ExecStart=/usr/bin/dotnet /home/ofagbuji/apps/recova.cba/Recova.CBA.WebAPI.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+SyslogIdentifier=approvals
+User=ofagbuji
+Environment=ASPNETCORE_ENVIRONMENT=Staging
+ENVIRONMENT=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+	
+[Install]
+WantedBy=multi-user.target
+
+

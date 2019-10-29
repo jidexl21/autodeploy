@@ -1,0 +1,10 @@
+[Unit]
+Description=Kafka Service
+
+[Service]
+User=ofagbuji
+WorkingDirectory=/usr/local/kafka
+ExecStart=/bin/bash bin/zookeeper-server-start.sh config/zookeeper.properties
+
+[Install]
+WantedBy=multi-user.target
