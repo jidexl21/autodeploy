@@ -1,0 +1,9 @@
+[Unit]
+Description=Schedule autodeployment  execution
+
+[Timer]
+OnUnitActiveSec=300s
+OnBootSec=300s
+
+[Install]
+WantedBy=timers.target

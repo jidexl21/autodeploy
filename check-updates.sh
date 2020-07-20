@@ -51,9 +51,9 @@ for filename in ./*.cfg; do
       echo "`date` - Updating $module ">> deployments.txt
       echo "`date` - Update required for $module"
         pwd
-      cd ..
+      cd $dir
      # continue
         echo "Updating $module ..."
-      ./deploy.sh -u $module -s #> /dev/null
+       ./deploy.sh -u $module -s -i #> /dev/null
       echo "`date` -finished updating $module">> deployments.txt
     fi done

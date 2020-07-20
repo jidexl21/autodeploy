@@ -3,6 +3,7 @@
 interactive="-i"
 unit=
 silent=0
+incremental=0
 
 while [ "$1" != "" ]; do
     case $1 in
@@ -10,6 +11,8 @@ while [ "$1" != "" ]; do
                                 unit="-$1"
                                 ;;
         -s | --silent )         silent=1
+                                ;;
+        -i | --incremental )    incremental=1
                                 ;;
         -h | --help )           usage
                                 exit
@@ -20,6 +23,7 @@ while [ "$1" != "" ]; do
     shift
 done
 echo "./autodeploy$unit.cfg"
+
 CFG_FILE="./autodeploy$unit.cfg"
 if [ -f "$CFG_FILE" ]; then
     echo "deploying unit '$unit'"
@@ -36,9 +40,15 @@ fi
 
 source "./utils/check.sh" $interactive
 source $CFG_FILE
+if [ $incremental -eq 1 ]
+then
+        cd $FOLDER
+        git pull origin $BRANCH
+else
+        rm -rf $FOLDER
+        git clone $REPO --branch $BRANCH --single-branch
+fi
 
-rm -rf $FOLDER
-git clone $REPO --branch $BRANCH --single-branch
 cd $TARGET_DIR
 
 echo "about to complete deployment on '$TARGET_DIR'"
@@ -47,14 +57,18 @@ echo "document type: '$BUILD_TYPE'"
 case $BUILD_TYPE in
                 "react")
                 echo "commencing deployment for react application"
+                pwd
+        if [ $incremental -eq 0 ]
+        then
                 npm install
                 echo "done with npm install"
-                npm run build:development
-
+        fi
+                $BUILD_COMMAND
+                #npm run build:staging
                 echo "done with npm run build"
                 ls $DEPLOYMENT_DIR/$FOLDER
                 #mkdir -p $DEPLOYMENT_DIR/$FOLDER
-                cp -r build/* $DEPLOYMENT_DIR/$FOLDER
+                #cp -rf build/* $DEPLOYMENT_DIR/$FOLDER
                 ##cd $DEPLOYMENT_DIR/$FOLDER
                 #pwd
                 echo "done with deployment"

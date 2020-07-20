@@ -46,4 +46,3 @@ then
       cat ~/.ssh/id_rsa.pub
   fi
 fi
-
