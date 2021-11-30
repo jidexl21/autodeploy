@@ -40,30 +40,13 @@ fi
 
 source "./utils/check.sh" $interactive
 source $CFG_FILE
-echo "performing git operation..."
 if [ $incremental -eq 1 ]
 then
         cd $FOLDER
-        ERROR=$(git pull origin $BRANCH 2>&1>/dev/null)
-
-        HASERROR=$(echo $ERROR | grep -i "fatal" | wc -c)
-        if [ $HASERROR -eq 0 ]; then
-           echo "git operation successful";
-        else
-          echo  $ERROR
-          exit(1)
-        fi
+        git pull origin $BRANCH
 else
-        rm -rf autodeploy
-        ERROR=$(git clone $REPO --branch $BRANCH --single-branch 2>&1>/dev/null)
-
-        HASERROR=$(echo $ERROR | grep -i "fatal" | wc -c)
-        if [ $HASERROR -eq 0 ]; then
-           echo "git operation successful";
-        else
-          echo  $ERROR
-          exit(1)
-        fi
+        rm -rf $FOLDER
+        git clone $REPO --branch $BRANCH --single-branch
 fi
 
 cd $TARGET_DIR
