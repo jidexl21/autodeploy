@@ -69,11 +69,9 @@ case $BUILD_TYPE in
                 ls $DEPLOYMENT_DIR/$FOLDER
                 #mkdir -p $DEPLOYMENT_DIR/$FOLDER
                 #cp -rf build/* $DEPLOYMENT_DIR/$FOLDER
-                ##cd $DEPLOYMENT_DIR/$FOLDER
+                cd $DEPLOYMENT_DIR/$FOLDER
                 #pwd
                 echo "done with deployment"
-                #systemctl stop nginx
-                #systemctl start nginx
                         ;;
                 *)
                 echo "commencing deployment for dotnetcore application"
