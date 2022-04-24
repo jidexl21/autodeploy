@@ -71,6 +71,7 @@ case $BUILD_TYPE in
                 #cp -rf build/* $DEPLOYMENT_DIR/$FOLDER
                 ##cd $DEPLOYMENT_DIR/$FOLDER
                 #pwd
+                $DEPLOY_COMMAND
                 echo "done with deployment"
                 #systemctl stop nginx
                 #systemctl start nginx
